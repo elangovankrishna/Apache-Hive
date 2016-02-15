@@ -1,0 +1,21 @@
+-- To create an excel out of hive table
+
+hive14 --hiveconf tez.queue.name=prodrevenue --hiveconf hive.cli.print.header=true -e 'select * from dev_reserves_enc.qaqc_base_final' | sed 's/[\t]/,/g'  > /users/s061332/git/reserves/QAQC/qaqc_base_merge/base_final.csv
+
+-- to look at hive logs 
+
+cd /tmp/<user-id>
+
+-- Hive optimization https://cwiki.apache.org/confluence/display/Hive/LanguageManual+JoinOptimization
+
+set hive.metastore.warehouse.dir; -- to get the metastore info
+
+set hive.cli.print.current.db=true -- To know which DB u are working on
+set hive.cli.print.header=true -- to display the coloumn names
+
+-- describe with formatted command will give you more info on the table like row and number of files easier to look at.
+
+describe formatted <table name>
+
+$ hive -f /myhive/queries/myquery.hql -- Run from Bash -f is asking it to run the file 
+source /myhive/queries/myquery.hql; -- Run from the hive -- source /myhive/queries/myquery.hql;
